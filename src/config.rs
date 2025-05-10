@@ -16,7 +16,7 @@ pub(crate) struct Config {
     pub(crate) word_length: usize,
     /// 词频阈值：低于此值的词将被忽略
     pub(crate) freq_threshold: usize,
-    /// 字符过滤方式：false则使用UTF-8值范围和额外字符，true则使用正则表达式
+    /// 字符筛选方式：false则使用UTF-8值范围和额外字符，true则使用正则表达式
     use_regex: bool,
     /// UTF-8值范围下限：19968即\u4e00，即"一"字，会被包含
     lower_limit: u32,
@@ -65,6 +65,7 @@ impl Config {
     ) -> Result<Box<dyn Fn(char) -> bool + Sync + '_>, Error> {
         if self.use_regex {
             let regex = regex::Regex::new(&self.regex).context("正则表达式格式错误")?;
+            println!("字符筛选方式：正则表达式 \"{}\"", self.regex);
             Ok(Box::new(move |c: char| regex.is_match(&c.to_string())))
         } else {
             let extra_chars: HashSet<char> = self
@@ -73,10 +74,23 @@ impl Config {
                 .filter(|c| (*c as u32) < self.lower_limit || (*c as u32) > self.upper_limit)
                 .collect();
             if extra_chars.is_empty() {
+                println!(
+                    "字符筛选方式：UTF-8值范围 [{}, {}] （共 {} 个字符）",
+                    self.lower_limit,
+                    self.upper_limit,
+                    self.upper_limit - self.lower_limit + 1
+                );
                 Ok(Box::new(|c: char| {
                     (c as u32) >= self.lower_limit && (c as u32) <= self.upper_limit
                 }))
             } else {
+                println!(
+                    "字符筛选方式：UTF-8值范围 [{}, {}] 和 {} 个额外字符（共 {} 个字符）",
+                    self.lower_limit,
+                    self.upper_limit,
+                    extra_chars.len(),
+                    (self.upper_limit - self.lower_limit + 1) as usize + extra_chars.len()
+                );
                 Ok(Box::new(move |c: char| {
                     (c as u32) >= self.lower_limit && (c as u32) <= self.upper_limit
                         || extra_chars.contains(&c)

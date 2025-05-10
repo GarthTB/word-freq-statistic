@@ -3,7 +3,7 @@
 [![README English](https://img.shields.io/badge/README-English-blue)](https://github.com/GarthTB/word-freq-statistic/blob/master/_en.md)
 [![用前必读 中文](https://img.shields.io/badge/用前必读-中文-red)](https://github.com/GarthTB/word-freq-statistic/blob/master/README.md)
 [![Built with Rust](https://img.shields.io/badge/Built%20with-Rust-brown)](https://www.rust-lang.org)
-[![Latest Release 0.1.0](https://img.shields.io/badge/Latest%20Release-0.1.0-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
+[![Latest Release 0.2.0](https://img.shields.io/badge/Latest%20Release-0.2.0-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-royalblue)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Introduction
@@ -89,6 +89,13 @@ Results:
 - Corpus files must be UTF-8 encoded. GBK/GB2312 encodings are unsupported.
 
 ## Changelog
+
+### v0.2.0 (2025-05-14)
+
+- Added timings for each step of the calculation and the whole process.
+- Added display of the filtering conditions and the total number of valid characters.
+- Optimized the performance of filtering with frequency threshold.
+- Fixed the program to exit directly when the end of the file is reached. (Now it is a pure TOML input, without any interactive input.)
 
 ### v0.1.0 (2025-05-10)
 
