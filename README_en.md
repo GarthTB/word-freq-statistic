@@ -3,7 +3,7 @@
 [![README English](https://img.shields.io/badge/README-English-blue)](https://github.com/GarthTB/word-freq-statistic/blob/master/_en.md)
 [![用前必读 中文](https://img.shields.io/badge/用前必读-中文-red)](https://github.com/GarthTB/word-freq-statistic/blob/master/README.md)
 [![Built with Rust](https://img.shields.io/badge/Built%20with-Rust-brown)](https://www.rust-lang.org)
-[![Latest Release 0.2.0](https://img.shields.io/badge/Latest%20Release-0.2.0-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
+[![Latest Release 0.2.1](https://img.shields.io/badge/Latest%20Release-0.2.1-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
 [![License Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-royalblue)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Introduction
@@ -86,11 +86,11 @@ Results:
 
 |                              Corpus                               | Valid Characters | Word Length | Frequency Threshold |           Filtering Mode           | First Round Time (s) | Second Round Time (s) | Total Time (s) |
 |:-----------------------------------------------------------------:|:----------------:|:-----------:|:-------------------:|:----------------------------------:|:--------------------:|:---------------------:|:--------------:|
-|                               Weibo                               |    118642377     |      2      |         10          |    19968-40959, no extra chars     |         3.4          |          2.8          |      6.5       |
-|                               Weibo                               |    118642377     |      2      |         10          |      regex "[\u4e00-\u9fff]"       |         6.2          |          6.3          |      12.7      |
-|                               Weibo                               |    118642377     |      4      |         10          | 19968-40959, with extra chars "，。" |         9.8          |          3.0          |      19.8      |
-|                               Weibo                               |    118642377     |      4      |         10          |     regex "[，。\u4e00-\u9fff]"      |         13.2         |          5.8          |      26.1      |
-| [WanJuan1.0](https://github.com/opendatalab/WanJuan1.0) - WebText |    999435429     |      2      |         10          |    19968-40959, no extra chars     |         23.4         |         22.8          |      47.1      |
+|                               Weibo                               |    118642377     |      2      |         10          |    19968-40959, no extra chars     |         2.8          |          2.5          |      5.6       |
+|                               Weibo                               |    118642377     |      2      |         10          |      regex "[\u4e00-\u9fff]"       |         5.4          |          5.5          |      11.2      |
+|                               Weibo                               |    118642377     |      4      |         10          | 19968-40959, with extra chars "，。" |         8.4          |          2.6          |      16.9      |
+|                               Weibo                               |    118642377     |      4      |         10          |     regex "[，。\u4e00-\u9fff]"      |         11.8         |          5.6          |      23.3      |
+| [WanJuan1.0](https://github.com/opendatalab/WanJuan1.0) - WebText |    999435429     |      2      |         10          |    19968-40959, no extra chars     |         20.9         |         20.7          |      42.4      |
 
 ## Notes
 
@@ -98,6 +98,11 @@ Results:
 - Corpus files must be UTF-8 encoded. GBK/GB2312 encodings are unsupported.
 
 ## Changelog
+
+### v0.2.1 (2025-05-15)
+
+- Fixed a bug that caused the program to fail to count the last word in a line.
+- Optimized the total time by excluding the time taken to load the configuration file.
 
 ### v0.2.0 (2025-05-14)
 

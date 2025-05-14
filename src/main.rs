@@ -4,7 +4,7 @@ mod core;
 fn main() {
     println!(
         "欢迎使用 Word Freq Statistic 词频统计工具！\n\
-        版本号：0.2.0 (2025-05-14)\n\
+        版本号：0.2.1 (2025-05-15)\n\
         作者：Garth TB <g-art-h@outlook.com>\n\
         仓库地址：https://github.com/GarthTB/word-freq-statistic"
     );

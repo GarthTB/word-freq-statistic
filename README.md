@@ -3,7 +3,7 @@
 [![README English](https://img.shields.io/badge/README-English-blue)](https://github.com/GarthTB/word-freq-statistic/blob/master/_en.md)
 [![用前必读 中文](https://img.shields.io/badge/用前必读-中文-red)](https://github.com/GarthTB/word-freq-statistic/blob/master/README.md)
 [![开发语言 Rust](https://img.shields.io/badge/开发语言-Rust-brown)](https://www.rust-lang.org)
-[![最新版本 0.2.0](https://img.shields.io/badge/最新版本-0.2.0-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
+[![最新版本 0.2.1](https://img.shields.io/badge/最新版本-0.2.1-brightgreen)](https://github.com/GarthTB/word-freq-statistic/releases)
 [![开源许可 Apache 2.0](https://img.shields.io/badge/开源许可-Apache%202.0-royalblue)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## 简介
@@ -81,11 +81,11 @@ regex = "[\u4e00-\u9fff]"
 
 |                         语料来源                         |   有效字数    | 词长 | 阈值 |          字符筛选方式          | 第一轮统计用时(秒) | 第二轮统计用时(秒) | 总用时(秒) |
 |:----------------------------------------------------:|:---------:|:--:|:--:|:------------------------:|:----------:|:----------:|:------:|
-|                          微博                          | 118642377 | 2  | 10 |    19968-40959，无额外字符     |    3.4     |    2.8     |  6.5   |
-|                          微博                          | 118642377 | 2  | 10 |  正则表达式"[\u4e00-\u9fff]"  |    6.2     |    6.3     |  12.7  |
-|                          微博                          | 118642377 | 4  | 10 |   19968-40959，额外字符"，。"   |    9.8     |    3.0     |  19.8  |
-|                          微博                          | 118642377 | 4  | 10 | 正则表达式"[，。\u4e00-\u9fff]" |    13.2    |    5.8     |  26.1  |
-| [万卷1.0](https://github.com/opendatalab/WanJuan1.0)网文 | 999435429 | 2  | 10 |    19968-40959，无额外字符     |    23.4    |    22.8    |  47.1  |
+|                          微博                          | 118642377 | 2  | 10 |    19968-40959，无额外字符     |    2.8     |    2.5     |  5.6   |
+|                          微博                          | 118642377 | 2  | 10 |  正则表达式"[\u4e00-\u9fff]"  |    5.4     |    5.5     |  11.2  |
+|                          微博                          | 118642377 | 4  | 10 |   19968-40959，额外字符"，。"   |    8.4     |    2.6     |  16.9  |
+|                          微博                          | 118642377 | 4  | 10 | 正则表达式"[，。\u4e00-\u9fff]" |    11.8    |    5.6     |  23.3  |
+| [万卷1.0](https://github.com/opendatalab/WanJuan1.0)网文 | 999435429 | 2  | 10 |    19968-40959，无额外字符     |    20.9    |    20.7    |  42.4  |
 
 ## 注意
 
@@ -93,6 +93,11 @@ regex = "[\u4e00-\u9fff]"
 - 语料文本应为UTF-8编码。程序不支持GBK、GB2312等编码。
 
 ## 更新日志
+
+### v0.2.1 (2025-05-15)
+
+- 修复：无法统计行尾残留词的问题
+- 优化：将载入配置文件排除在总计时长之外
 
 ### v0.2.0 (2025-05-14)
 

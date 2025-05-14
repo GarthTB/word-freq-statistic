@@ -1,6 +1,6 @@
 [package]
 name = "word_freq_statistic"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2024"
 authors = ["Garth TB <g-art-h@outlook.com>"]
 description = "A Rust application to analyze word frequency in a text file."
