@@ -6,13 +6,12 @@ use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::Instant;
 
 pub(crate) fn run() -> Result<f32, anyhow::Error> {
-    let time = Instant::now();
-
     println!("载入配置文件...");
     let config = Config::load()?;
     let word_len = config.word_length;
     let is_valid_char = config.get_judge_char_func()?;
-    println!("载入成功！即将统计 {word_len} 字词...");
+    let time = Instant::now();
+    println!("载入成功！开始计时！即将统计 {word_len} 字词...");
 
     println!("第一轮统计...");
     let time1 = Instant::now();
@@ -64,6 +63,10 @@ pub(crate) fn run() -> Result<f32, anyhow::Error> {
                 heads.clear();
             }
         }
+        if heads.len() >= word_len {
+            let tail = line.len();
+            count_word(&word_freq, &comb_freq, &line, &mut heads, tail, word_len);
+        }
     })?;
     println!("统计完成！用时：{:.6} s", time2.elapsed().as_secs_f32());
 
@@ -95,10 +98,9 @@ pub(crate) fn run() -> Result<f32, anyhow::Error> {
 }
 
 fn record(map: &DashMap<String, AtomicUsize>, key: &str) {
-    if let Some(freq) = map.get_mut(key) {
-        freq.fetch_add(1, Ordering::Relaxed);
-    } else {
-        map.insert(key.to_string(), AtomicUsize::new(1));
+    match map.get_mut(key) {
+        Some(freq) => _ = freq.fetch_add(1, Ordering::Relaxed),
+        None => _ = map.insert(key.to_string(), AtomicUsize::new(1)),
     }
 }
 
